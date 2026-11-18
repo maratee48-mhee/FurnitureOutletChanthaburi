@@ -1,0 +1,15 @@
+.dock {
+  position: fixed; top: 0; right: 5px; z-index: 20;
+  display: flex; align-items: center; gap: 2px;
+}
+.dock-btn, .dock-toggle i {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--ink);
+  transition: color .2s var(--ease), background .2s var(--ease);
+}
+.dock-btn:hover, .dock-btn:focus-visible, .dock-toggle:hover i, .dock-toggle:focus-visible i { color: var(--brand); background: var(--card); outline: none; }
+.dock svg { width: 22px; height: 22px; fill: currentColor; }
+.dock-toggle { display: flex; align-items: center; gap: 4px; border: 0; background: none; padding: 0; cursor: pointer; color: var(--muted); }
+.dock-toggle path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.dock-toggle path[d^='M4'] { fill: currentColor; stroke: none; }
+@media (prefers-reduced-motion: reduce) { .dock-btn, .dock-toggle i { transition: none; } }
+

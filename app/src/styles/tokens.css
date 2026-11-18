@@ -1,0 +1,49 @@
+/* Design tokens — extracted from design/reference.html :root */
+:root {
+  --ground: #f6f2ee; /* warm paper, lets the transparent logo sit on the page */
+  --card: #fcfaf8;
+  --ink: #1c1517; /* the logo's black rule, warmed */
+  --muted: #75686b;
+  --line: #ddd3d1;
+  --brand: #e11a45; /* logo red */
+  --surface: #fff;  /* inputs, active rows, product photo tiles */
+  --on-ink: #fff;   /* text sitting on an --ink fill */
+  color-scheme: light;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* sizes — --s / --hs / --lw are overwritten at runtime by OrbitStage */
+  --s: 120px;  /* box */
+  --hs: 168px; /* hovered box */
+  --lw: 240px; /* logo width */
+
+  /* type */
+  --font: 'Archivo', 'Noto Sans Thai', system-ui, sans-serif;
+  --fs-body: 14px;
+  --fs-bar: 11px;
+  --fs-bar-th: 12px;
+  --fs-back-title: 13px;
+  --fs-back-en: 9.5px;
+  --fs-back-sub: 11.5px;
+  --tracking: .14em;
+
+  /* category page */
+  --on-photo: #fff;
+  --scrim: 28, 21, 23; /* ink as rgb, for photo scrims */
+  --fs-display: clamp(3rem, 10vw, 6rem);
+  --fs-h2: clamp(1.5rem, 3.2vw, 2.25rem);
+  --fs-price: 1.125rem;
+  --ease-out: cubic-bezier(.16, 1, .3, 1); /* expo-out */
+  --gutter: clamp(16px, 4vw, 48px);
+}
+
+/* night theme (18:30-05:00 on the visitor's clock, set by src/lib/daytime.ts): soft grey, same red */
+:root[data-theme='dark'] {
+  --ground: #3c3d41;
+  --card: #48494e;
+  --surface: #525358;
+  --ink: #f6f6f7;
+  --on-ink: #2a2b2e;
+  --muted: #c9c9cd;
+  --line: #5e5f65;
+  color-scheme: dark;
+}

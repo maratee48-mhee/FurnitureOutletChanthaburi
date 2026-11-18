@@ -1,0 +1,17 @@
+.follow-cue {
+  position: fixed; left: 50%; bottom: 8px; z-index: 15; translate: -50% 0;
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px 10px 20px;
+  background: var(--brand); color: #fff; text-decoration: none; border-radius: 999px;
+  font: 600 13px/1.2 var(--font); letter-spacing: .04em;
+  box-shadow: 0 10px 24px -8px rgba(225, 26, 69, .55);
+  animation: follow-bob 1.6s ease-in-out infinite;
+  transition: opacity .3s var(--ease), visibility .3s;
+}
+.follow-cue span { display: flex; flex-direction: column; }
+.follow-cue small { font-weight: 400; font-size: 11px; opacity: .85; letter-spacing: 0; }
+.follow-cue svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.follow-cue:hover, .follow-cue:focus-visible { background: var(--ink); color: var(--on-ink); outline: none; }
+.follow-cue.gone { opacity: 0; visibility: hidden; }
+@keyframes follow-bob { 50% { transform: translateY(-9px); } }
+@media (prefers-reduced-motion: reduce) { .follow-cue { animation: none; } }
+@media (max-width: 600px) { .follow-cue { bottom: 64px; } }

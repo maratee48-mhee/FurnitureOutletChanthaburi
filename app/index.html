@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f6f2ee" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- dark from 18:30 to 05:00 on the visitor's clock unless the sun/moon button pinned a mode (same rule as src/lib/daytime.ts), set before first paint -->
+    <script>(function(){var d=new Date(),m=d.getHours()*60+d.getMinutes(),t=(m>=1110||m<300)?'dark':'light';try{var p=localStorage.getItem('fo-theme');if(p==='light'||p==='dark')t=p}catch(e){}if(t==='dark'){document.documentElement.dataset.theme='dark';document.querySelector('meta[name="theme-color"]').content='#3c3d41'}})()</script>
+    <!--seo:start-->
+    <title>Furniture Outlet</title>
+    <!--seo:end-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Noto+Sans+Thai:wght@400;500;600&family=Shadows+Into+Light&display=swap" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

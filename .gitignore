@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vercel/
+.env*
+.impeccable/review/
+*.log
+
+.vercel
+.env*

@@ -1,0 +1,51 @@
+.stage { position: relative; flex: 1; min-height: 0; }
+.ring {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  border: 1px solid var(--line); border-radius: 50%; pointer-events: none;
+  /* opens out from the logo in brand red, then settles to the hairline grey as the cards arrive */
+  animation: ring-open 2.4s var(--ease-out) 1.6s both;
+}
+@keyframes ring-open {
+  0%   { scale: .03; opacity: 1; border-color: var(--brand); border-width: 1.5px; }
+  60%  { scale: 1; border-color: var(--brand); border-width: 1.5px; }
+  100% { scale: 1; opacity: 1; border-color: var(--line); border-width: 1px; }
+}
+
+/* Logo: three clipped copies of logo.png (FURNITURE / rule / OUTLET) with a clean staggered reveal */
+.logo {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: var(--lw);
+  aspect-ratio: 1204 / 502;
+  z-index: 3; pointer-events: none; user-select: none;
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,.18));
+}
+.logo-part {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0;
+}
+/* red extrusion first, then a black outline around the whole letter shape */
+.logo-top, .logo-bottom {
+  filter: drop-shadow(1px 1px 0 #a3132f) drop-shadow(1px 1px 0 #a3132f) drop-shadow(1px 1px 0 #a3132f) drop-shadow(1px 1px 0 #a3132f) drop-shadow(1.5px 0 0 #111) drop-shadow(-1.5px 0 0 #111) drop-shadow(0 1.5px 0 #111) drop-shadow(0 -1.5px 0 #111);
+}
+.logo-top {
+  clip-path: inset(0 0 61.75% 0);
+  animation: logo-rise .9s var(--ease) .2s both;
+}
+.logo-line {
+  clip-path: inset(38.25% 0 52.19% 0);
+  filter: drop-shadow(1px 1px 0 #444) drop-shadow(1px 1px 0 #333);
+  animation: logo-rule .8s var(--ease) .75s both;
+}
+.logo-bottom {
+  clip-path: inset(47.81% 0 0 0);
+  animation: logo-rise .9s var(--ease) 1.05s both;
+}
+@keyframes logo-rise {
+  from { opacity: 0; translate: 0 14px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes logo-rule {
+  from { opacity: 1; clip-path: inset(38.25% 50% 52.19% 50%); }
+  to   { opacity: 1; clip-path: inset(38.25% 0 52.19% 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-part, .ring { animation: none; opacity: 1; }
+}

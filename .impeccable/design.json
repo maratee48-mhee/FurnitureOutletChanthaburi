@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-25T00:00:00Z",
+  "title": "Design System: Furniture Outlet",
+  "extensions": {
+    "colorMeta": {
+      "logo-blue": { "role": "primary", "displayName": "Logo Blue", "canonical": "#0000ff", "tonalRamp": ["#00003d", "#000070", "#0000a8", "#0000ff", "#4747ff", "#8080ff", "#b8b8ff", "#e6e6ff"] },
+      "ink": { "role": "neutral", "displayName": "Night Ink", "canonical": "#0b0b1c", "tonalRamp": ["#0b0b1c", "#23233a", "#3b3b55", "#555570", "#76768c", "#9d9daf", "#c7c7d3", "#ececf2"] },
+      "muted": { "role": "neutral", "displayName": "Slate Muted", "canonical": "#6a6a7a", "tonalRamp": ["#1e1e25", "#35353f", "#4f4f5c", "#6a6a7a", "#88889a", "#a8a8b6", "#cacad3", "#ececf0"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#c6c6d0", "tonalRamp": ["#26262c", "#44444c", "#65656f", "#878793", "#a7a7b2", "#c6c6d0", "#dfdfe6", "#f2f2f6"] },
+      "ground": { "role": "neutral", "displayName": "Showroom Grey", "canonical": "#ebebeb", "tonalRamp": ["#262626", "#444444", "#656565", "#878787", "#a8a8a8", "#c9c9c9", "#ebebeb", "#f7f7f7"] },
+      "card": { "role": "neutral", "displayName": "Card White", "canonical": "#f7f7f9", "tonalRamp": ["#26262a", "#44444a", "#65656c", "#87878f", "#a9a9b1", "#cbcbd2", "#e6e6eb", "#f7f7f9"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#ffffff", "tonalRamp": ["#262626", "#474747", "#6b6b6b", "#8f8f8f", "#b3b3b3", "#d6d6d6", "#f0f0f0", "#ffffff"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Thai room name centred in the category photo hero." },
+      "headline": { "displayName": "Headline", "purpose": "Section heads; larger step on the contact band, smaller on room links." },
+      "title": { "displayName": "Title", "purpose": "Product names, two-line clamp." },
+      "price": { "displayName": "Price", "purpose": "Listed price in Logo Blue, tabular numerals." },
+      "body": { "displayName": "Body", "purpose": "Default running text." },
+      "label": { "displayName": "Label", "purpose": "Bars, English under Thai names, orbit card English; uppercase, 0.14em." },
+      "english-echo": { "displayName": "English Echo", "purpose": "Expanded (125%) wide-tracked uppercase English under Thai display or headline." }
+    },
+    "shadows": [
+      { "name": "blue-lift", "value": "0 22px 44px -22px rgba(0, 0, 120, .45)", "purpose": "Orbit and product cards on hover/focus only, paired with a blue border." },
+      { "name": "title-glow", "value": "0 2px 24px rgba(11, 11, 28, .35)", "purpose": "text-shadow on display type over a photo, part of the scrim." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(.2, .7, .2, 1)", "purpose": "Orbit card growth, logo entrance, view-transition morph, cue bob." },
+      { "name": "ease-out", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "Entrances and nudges on the category page: hero settle, title land, rule draw, card rise, arrow nudge." },
+      { "name": "state", "value": ".2s", "purpose": "Colour and border state changes." },
+      { "name": "grow", "value": ".35s", "purpose": "Orbit card size change." },
+      { "name": "room-hero-morph", "value": ".7s", "purpose": "View transition from orbit card to category hero." },
+      { "name": "card-rise-stagger", "value": "70ms", "purpose": "Per-column delay for product card reveal." }
+    ],
+    "breakpoints": [
+      { "name": "category-mobile", "value": "560px" },
+      { "name": "home-mobile", "value": "600px" },
+      { "name": "touch", "value": "(hover: none)" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Home card language applied to a product: white picture well, name, blue price, muted link; blue lift on hover.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-pic\"><span class=\"ds-card-off\">-20%</span></span><span class=\"ds-card-body\"><span class=\"ds-card-name\">เตียงนอน ขนาด 5 ฟุต สีขาว</span><span class=\"ds-card-price\"><b>4,390 ฿</b><s>6,400 ฿</s></span><span class=\"ds-card-go\">ดูสินค้า <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" width=\"14\" height=\"14\"><path d=\"M8 16L16 8M9 8h7v7\"/></svg></span></span></a>",
+      "css": ".ds-card { display: flex; flex-direction: column; width: 236px; overflow: hidden; color: var(--ink, #0b0b1c); text-decoration: none; background: var(--card, #f7f7f9); border: 1px solid var(--line, #c6c6d0); border-radius: 6px; font-family: Archivo, 'Noto Sans Thai', system-ui, sans-serif; transition: border-color .2s, box-shadow .3s, translate .3s cubic-bezier(.16,1,.3,1); } .ds-card:hover, .ds-card:focus-visible { border-color: var(--blue, #0000ff); box-shadow: 0 22px 44px -22px rgba(0,0,120,.45); translate: 0 -2px; } .ds-card:focus-visible { outline: 2px solid var(--blue, #0000ff); outline-offset: 3px; } .ds-card-pic { position: relative; aspect-ratio: 1; background: #fff; border-bottom: 1px solid var(--line, #c6c6d0); } .ds-card-off { position: absolute; top: 10px; left: 10px; padding: 4px 8px; border-radius: 3px; background: var(--blue, #0000ff); color: #fff; font: 600 12px/1 inherit; font-variant-numeric: tabular-nums; } .ds-card-body { display: flex; flex-direction: column; gap: 8px; padding: 14px 14px 16px; } .ds-card-name { font-size: 15px; font-weight: 500; line-height: 1.45; } .ds-card-price { display: flex; gap: 10px; align-items: baseline; font-variant-numeric: tabular-nums; } .ds-card-price b { font-size: 1.125rem; font-weight: 600; color: var(--blue, #0000ff); } .ds-card-price s { font-size: 13px; color: var(--muted, #6a6a7a); } .ds-card-go { font-size: 12px; font-weight: 600; color: var(--muted, #6a6a7a); transition: color .2s; } .ds-card-go svg { vertical-align: -2px; } .ds-card:hover .ds-card-go { color: var(--blue, #0000ff); }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pill filter with a count; pressed turns solid blue; dashed variant links out to the shop.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">ทั้งหมด <span>9</span></button><button class=\"ds-chip\" aria-pressed=\"false\">เตียง <span>4</span></button><a class=\"ds-chip ds-chip-out\" href=\"#\">โต๊ะเครื่องแป้ง <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" width=\"14\" height=\"14\"><path d=\"M8 16L16 8M9 8h7v7\"/></svg></a></div>",
+      "css": ".ds-chips { display: flex; gap: 8px; } .ds-chip { display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 0 16px; border: 1px solid var(--line, #c6c6d0); border-radius: 999px; background: var(--card, #f7f7f9); color: var(--ink, #0b0b1c); font: 500 14px/1 Archivo, 'Noto Sans Thai', system-ui, sans-serif; cursor: pointer; text-decoration: none; transition: background .2s, border-color .2s, color .2s; } .ds-chip span { color: var(--muted, #6a6a7a); font-variant-numeric: tabular-nums; } .ds-chip:hover { border-color: var(--blue, #0000ff); color: var(--blue, #0000ff); } .ds-chip:focus-visible { outline: 2px solid var(--blue, #0000ff); outline-offset: 2px; } .ds-chip[aria-pressed='true'] { background: var(--blue, #0000ff); border-color: var(--blue, #0000ff); color: #fff; } .ds-chip[aria-pressed='true'] span { color: rgba(255,255,255,.75); } .ds-chip-out { background: transparent; border-style: dashed; color: var(--muted, #6a6a7a); }"
+    },
+    {
+      "name": "White Button",
+      "kind": "button",
+      "refersTo": "button-white",
+      "description": "Primary action on the blue contact band.",
+      "html": "<div class=\"ds-band\"><a class=\"ds-btn ds-btn-white\" href=\"#\">LINE @djp4480q</a></div>",
+      "css": ".ds-band { background: var(--blue, #0000ff); padding: 32px; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 6px; font: 600 15px/1 Archivo, 'Noto Sans Thai', system-ui, sans-serif; text-decoration: none; transition: background .2s, color .2s, border-color .2s; } .ds-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; } .ds-btn-white { background: #fff; color: var(--blue, #0000ff); } .ds-btn-white:hover { background: var(--ink, #0b0b1c); color: #fff; }"
+    },
+    {
+      "name": "Line Button",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Secondary action on the blue contact band.",
+      "html": "<div class=\"ds-band\"><a class=\"ds-btn ds-btn-line\" href=\"#\">โทร 086 888 6163</a></div>",
+      "css": ".ds-band { background: var(--blue, #0000ff); padding: 32px; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 6px; font: 600 15px/1 Archivo, 'Noto Sans Thai', system-ui, sans-serif; text-decoration: none; transition: background .2s, color .2s, border-color .2s; } .ds-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; } .ds-btn-line { border: 1px solid rgba(255,255,255,.55); color: #fff; } .ds-btn-line:hover { border-color: #fff; background: rgba(255,255,255,.1); }"
+    },
+    {
+      "name": "Label Bar Nav",
+      "kind": "nav",
+      "description": "Home top/bottom bar: tracked uppercase labels; links turn blue with an underline.",
+      "html": "<header class=\"ds-bar\"><span>Furniture for every room</span><nav><a href=\"#\">Facebook</a><a href=\"#\">LINE</a><a href=\"#\">086 888 6163</a></nav></header>",
+      "css": ".ds-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; font: 500 11px/1.4 Archivo, 'Noto Sans Thai', system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--muted, #6a6a7a); } .ds-bar nav { display: flex; gap: 20px; } .ds-bar a { color: var(--ink, #0b0b1c); text-decoration: none; border-bottom: 1px solid transparent; } .ds-bar a:hover, .ds-bar a:focus-visible { color: var(--blue, #0000ff); border-color: currentColor; outline: none; }"
+    },
+    {
+      "name": "Room Link",
+      "kind": "nav",
+      "description": "Next/previous room: Thai name at headline scale, English label below, arrow slides on hover.",
+      "html": "<a class=\"ds-room\" href=\"#\"><b>ห้องนั่งเล่น <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M9 5l7 7-7 7\"/></svg></b><i>Living room</i></a>",
+      "css": ".ds-room { display: grid; gap: 6px; padding: 40px 32px; color: var(--ink, #0b0b1c); text-decoration: none; font-family: Archivo, 'Noto Sans Thai', system-ui, sans-serif; border-top: 1px solid var(--line, #c6c6d0); transition: background .25s, color .25s; } .ds-room b { display: flex; align-items: center; gap: 10px; font-size: 1.75rem; font-weight: 600; line-height: 1.25; } .ds-room svg { width: .9em; height: .9em; transition: translate .25s cubic-bezier(.16,1,.3,1); } .ds-room:hover svg { translate: 4px 0; } .ds-room i { font: 500 10.5px/1.3 inherit; font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--muted, #6a6a7a); } .ds-room:hover, .ds-room:focus-visible { background: var(--card, #f7f7f9); color: var(--blue, #0000ff); outline: none; }"
+    },
+    {
+      "name": "Orbit Box",
+      "kind": "custom",
+      "refersTo": "orbit-box",
+      "description": "Signature: pale room card on the orbit; grows and flips to its detail face on hover/focus.",
+      "html": "<a class=\"ds-box\" href=\"#\"><span class=\"ds-front\"><svg viewBox=\"0 0 64 64\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linejoin=\"miter\"><path d=\"M8 44V20M8 36h48v8M20 36v-8h36v8\"/></svg><b>ห้องนอน</b><i>Bedroom</i></span><span class=\"ds-back\"><b>ห้องนอน</b><i>Bedroom</i><span>ชุดห้องนอน · เตียง · ตู้เสื้อผ้า</span><em>เลือกซื้อ</em></span></a>",
+      "css": ".ds-box { position: relative; display: block; width: 120px; height: 120px; background: var(--card, #f7f7f9); border: 1px solid var(--line, #c6c6d0); border-radius: 6px; color: var(--blue, #0000ff); text-decoration: none; font-family: Archivo, 'Noto Sans Thai', system-ui, sans-serif; overflow: hidden; transition: width .35s cubic-bezier(.2,.7,.2,1), height .35s cubic-bezier(.2,.7,.2,1), border-color .2s, box-shadow .3s; } .ds-front, .ds-back { position: absolute; inset: 0; transition: opacity .2s; } .ds-front { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; } .ds-front svg { width: 44%; } .ds-front b { font-size: 11px; font-weight: 500; color: var(--ink, #0b0b1c); } .ds-front i { font-size: 8px; font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--muted, #6a6a7a); } .ds-back { display: flex; flex-direction: column; gap: 6px; padding: 14px; opacity: 0; color: var(--ink, #0b0b1c); } .ds-back b { font-size: 13px; font-weight: 600; } .ds-back i { font-size: 9.5px; font-weight: 500; font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--blue, #0000ff); } .ds-back span { font-size: 11.5px; line-height: 1.5; color: var(--muted, #6a6a7a); } .ds-back em { margin-top: auto; font-size: 12px; font-weight: 600; font-style: normal; color: var(--blue, #0000ff); } .ds-box:hover, .ds-box:focus-visible { width: 168px; height: 168px; border-color: var(--blue, #0000ff); box-shadow: 0 22px 44px -22px rgba(0,0,120,.45); } .ds-box:focus-visible { outline: 2px solid var(--blue, #0000ff); outline-offset: 3px; } .ds-box:hover .ds-front, .ds-box:focus-visible .ds-front { opacity: 0; } .ds-box:hover .ds-back, .ds-box:focus-visible .ds-back { opacity: 1; transition-delay: .12s; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Showroom Orbit",
+    "overview": "The home is one screen: the blue chair logo at the centre of a hairline ring, with the eight rooms orbiting it as small pale cards. Hovering a card grows and turns it over to show the room's detail; clicking grows it into the room itself. On the category page that card becomes a full-bleed photo hero (View Transition room-hero), and the product list below reuses the same card: pale fill, hairline border, 6px corners, blue on hover.\n\nThe world is quiet, grey and exact. It uses one saturated colour, the logo blue (#0000FF). Everything else is a narrow set of cool greys: a grey page, a lighter card, a hairline and near-black ink. Depth comes from the hairline border and a single soft, blue-tinted lift that appears only on hover or focus. Photography brings the only warm colour, and only in the category hero and the product pictures.\n\nEvery piece of copy pairs Thai with English. Thai carries the meaning at full size, and English sits beside or below it as a small, wide, tracked uppercase line.",
+    "keyCharacteristics": [
+      "One accent, the logo blue, used for state, prices, sale badges and the contact band.",
+      "Pale cards (#F7F7F9) on grey (#EBEBEB), outlined with a 1px hairline and 6px corners.",
+      "Archivo + Noto Sans Thai in one stack. English appears as a tracked uppercase echo of the Thai.",
+      "Surfaces are flat at rest. They lift only in response to hover or focus.",
+      "Motion settles and grows: cards expand, heroes morph, lines draw."
+    ],
+    "rules": [
+      { "name": "The One Blue Rule", "body": "Logo Blue is the only chromatic colour the interface itself uses. A new state, tag or highlight uses blue or a grey, never a new hue.", "section": "colors" },
+      { "name": "The Photo Scrim Rule", "body": "White type sits on photos only over an ink scrim: a radial pool behind the title plus a linear top-and-bottom darkening, with a soft ink text-shadow on the display line. Gradients in this world are scrims, not decoration.", "section": "colors" },
+      { "name": "The Thai-First Rule", "body": "Thai comes first and takes the larger size. English follows at label or echo scale. Never show English alone where Thai belongs.", "section": "typography" },
+      { "name": "The Wide-English Rule", "body": "Tracking and 125% width belong to Latin uppercase only. Thai lines always reset to letter-spacing: 0 and normal case.", "section": "typography" },
+      { "name": "The Lift-On-Intent Rule", "body": "Nothing casts a shadow at rest. The blue lift is a reply to the pointer or focus, always paired with a Logo Blue border.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do build every new surface from the six tokens in app/src/styles/tokens.css: ground, card, hairline, ink, muted and Logo Blue.",
+      "Do put content on pale cards with a 1px hairline and 6px corners. On hover or focus, answer with a blue border, the blue lift (0 22px 44px -22px rgba(0,0,120,.45)) and a 2px rise.",
+      "Do pair every Thai heading with an English line at label or echo scale, and reset tracking to 0 on Thai.",
+      "Do use the Arrow and RoomIcon SVG components for every directional or room cue, stroked in currentColor.",
+      "Do keep white type on photos over the ink scrim, and give a photo credit its own local scrim.",
+      "Do use --ease (cubic-bezier(.2,.7,.2,1)) for growth and state, and --ease-out (cubic-bezier(.16,1,.3,1)) for entrances. Honour prefers-reduced-motion everywhere."
+    ],
+    "donts": [
+      "Don't introduce a second accent hue. Sale, active and link states all use Logo Blue.",
+      "Don't cast a shadow at rest, and don't use hard or offset shadows.",
+      "Don't track or widen Thai text, or set it in uppercase styling.",
+      "Don't use text glyphs (↗, →) as icons. Use the Arrow component.",
+      "Don't round containers beyond 6px. Pills are for chips only, and circles are for the ring and the scroll cue only."
+    ]
+  }
+}

@@ -1,0 +1,173 @@
+/* floating contact buttons on the room pages */
+.fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.fab-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* buttons pop up one by one, bottom first; they fold back when hidden */
+.fab-list li {
+  opacity: 0;
+  transform: translateY(18px) scale(0.5);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.25s ease;
+}
+.fab.open .fab-list li {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc((3 - var(--i)) * 70ms);
+}
+
+.fab-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fab-btn:hover,
+.fab-btn:focus-visible {
+  transform: scale(1.1);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.34);
+}
+.fab-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+.fab-phone { background: #34c759; }
+.fab-facebook { background: #1877f2; }
+.fab-line { background: #06c755; }
+.fab-tiktok { background: #111; }
+
+/* name label that slides out beside the button */
+.fab-tip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translate(8px, -50%);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f1f1f;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.fab-btn:hover .fab-tip,
+.fab-btn:focus-visible .fab-tip {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+.fab-tip-main {
+  opacity: 1;
+  transform: translate(0, -50%);
+  font-weight: 600;
+}
+.fab-main { cursor: pointer; }
+.fab-tip-main { transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease; }
+.fab-main:hover .fab-tip-main,
+.fab-main:focus-visible .fab-tip-main {
+  background: #111;
+  color: #fff;
+}
+
+/* main button: brand red, soft pulse rings while the others are hidden */
+.fab-main {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #e11a45;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(225, 26, 69, 0.45);
+  transition: transform 0.2s ease;
+}
+.fab-main:hover { transform: scale(1.06); }
+.fab-main:focus-visible,
+.fab-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+.fab-main svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.fab-main::before,
+.fab-main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #e11a45;
+  opacity: 0;
+  pointer-events: none;
+}
+.fab:not(.open) .fab-main::before { animation: fab-pulse 2s ease-out infinite; }
+.fab:not(.open) .fab-main::after { animation: fab-pulse 2s ease-out 1s infinite; }
+.fab:not(.open) .fab-main { animation: fab-wiggle 4s ease-in-out 1s infinite; }
+
+@keyframes fab-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes fab-wiggle {
+  0%, 88%, 100% { transform: rotate(0); }
+  91% { transform: rotate(-10deg); }
+  94% { transform: rotate(9deg); }
+  97% { transform: rotate(-5deg); }
+}
+
+@media (max-width: 600px) {
+  .fab { right: 14px; bottom: 14px; gap: 10px; }
+  .fab-list { gap: 10px; }
+  .fab-btn { width: 48px; height: 48px; }
+  .fab-btn svg { width: 24px; height: 24px; }
+  .fab-main { width: 54px; height: 54px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab *,
+  .fab *::before,
+  .fab *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* touch screens: no hover, so the always-on "ติดต่อเรา" label would just sit on top of the content */
+@media (hover: none) { .fab-tip-main { display: none; } }

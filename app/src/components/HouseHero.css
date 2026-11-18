@@ -1,0 +1,155 @@
+/* ---------- house hero: cut-away house behind each room page ---------- */
+.house {
+  position: absolute; inset: 0; z-index: -1; overflow: hidden;
+  /* sky above, grass below, sampled from each photo's edges, so screens taller than the photo extend the scene */
+  --sky: #bbd5f1; --grass: #758533;
+  background: linear-gradient(var(--sky) 0 50%, var(--grass) 50% 100%);
+}
+.house.dawn { --sky: #bbc8ec; --grass: #2d432d; }
+.house.eve { --sky: #dbb5a1; --grass: #3a3812; }
+.house.night { --sky: #0c1c36; --grass: #212f1a; }
+.house-blur { display: none; }
+.house-pan { position: absolute; inset: 0; overflow: hidden; }
+.hh-swipe { display: none; }
+/* the stage keeps the photo's aspect so rooms, lines and labels stay locked to the picture */
+.house-stage {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  aspect-ratio: 2752 / 1536; width: max(100%, 179.2svh, 932px);
+}
+.house-photo { position: absolute; inset: 0; transform-origin: 50% 60%; animation: hh-breathe 40s ease-in-out infinite alternate; }
+.house-photo.push { animation: hh-push 2.8s var(--ease-out) both, hh-breathe 40s ease-in-out 2.8s infinite alternate; }
+@keyframes hh-breathe { to { transform: scale(1.025); } }
+@keyframes hh-push { from { scale: 1.09; } }
+.house-img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; animation: hh-fade 1.6s ease both; }
+@keyframes hh-fade { from { opacity: 0; } }
+.house-fx, .house-links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.house-fx { pointer-events: none; }
+
+.hh-cloud { fill: #fff; opacity: .55; filter: url(#hh-soft); }
+.hh-drift { animation: hh-drift linear infinite; }
+@keyframes hh-drift { from { transform: translateX(-500px); } to { transform: translateX(2300px); } }
+.hh-mist { fill: #f4f2fb; opacity: .42; filter: url(#hh-soft); }
+.hh-mist-a { animation: hh-mist 26s ease-in-out infinite alternate; }
+.hh-mist-b { animation: hh-mist 34s ease-in-out -12s infinite alternate-reverse; }
+@keyframes hh-mist { from { transform: translateX(-90px); } to { transform: translateX(110px); } }
+.hh-sunglow { fill: url(#hh-sun); mix-blend-mode: screen; animation: hh-breath 6s ease-in-out infinite; }
+.hh-lamp { fill: url(#hh-lamp); mix-blend-mode: screen; animation: hh-breath 5s ease-in-out infinite; }
+.hh-bulb { fill: url(#hh-lamp); mix-blend-mode: screen; animation: hh-twinkle 2.4s ease-in-out infinite; }
+@keyframes hh-breath { 0%, 100% { opacity: .55; } 50% { opacity: .95; } }
+.hh-star { fill: #fff8e1; animation: hh-twinkle 3.2s ease-in-out infinite; }
+@keyframes hh-twinkle { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+.hh-fly { fill: #fff3a6; filter: url(#hh-dot); animation: hh-float 7s ease-in-out infinite; }
+@keyframes hh-float { 0%, 100% { transform: translate(0, 0); opacity: .15; } 40% { opacity: 1; } 50% { transform: translate(16px, -22px); opacity: .9; } }
+.hh-smoke { fill: #d9d6e2; opacity: 0; transform-box: fill-box; transform-origin: center; animation: hh-smoke 6s ease-out infinite; }
+.night .hh-smoke { fill: #8e8aa6; }
+@keyframes hh-smoke { 0% { transform: translate(0, 0) scale(.5); opacity: 0; } 25% { opacity: .35; } 100% { transform: translate(30px, -110px) scale(2); opacity: 0; } }
+
+/* rooms are links: hover lights the room, thickens its line and turns its label red */
+.hh-room { cursor: pointer; outline: none; }
+.hh-hit { fill: rgba(255, 236, 190, 0); stroke: rgba(255, 255, 255, 0); stroke-width: 5; transition: fill .3s, stroke .3s; }
+.hh-room.on .hh-hit, .hh-room:focus-visible .hh-hit { fill: rgba(255, 236, 190, .16); stroke: #fff; }
+.hh-room.cur .hh-hit { fill: rgba(255, 236, 190, .12); stroke: rgba(255, 255, 255, .9); stroke-dasharray: 14 10; }
+.hh-lead {
+  fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; pointer-events: none;
+  stroke-dasharray: 600; stroke-dashoffset: 600; animation: hh-draw 1.2s cubic-bezier(.45, .05, .55, .95) forwards;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45)); transition: stroke .25s, stroke-width .25s;
+}
+.hh-lead.on { stroke: #ffd7df; stroke-width: 5; }
+.hh-lead.cur { stroke: #ffd7df; }
+@keyframes hh-draw { to { stroke-dashoffset: 0; } }
+.hh-dot { fill: #fff; stroke: var(--brand); stroke-width: 4; pointer-events: none; transform-box: fill-box; transform-origin: center; animation: hh-pulse 2.4s ease-in-out infinite; }
+@keyframes hh-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+
+.hh-tag {
+  position: absolute; display: flex; flex-direction: column; gap: 1px; padding: 7px 14px 8px; border-radius: 12px;
+  background: rgba(255, 252, 246, .88); color: var(--ink); text-decoration: none; white-space: nowrap;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .45); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  font-family: var(--font); text-shadow: none; letter-spacing: 0; text-transform: none;
+  opacity: 0; animation: hh-tag .6s ease-out forwards; transition: background .25s, color .25s;
+}
+.hh-tag b { font: 700 16px/1.25 var(--font); }
+.hh-tag i { font: 600 9.5px/1.2 var(--font); font-style: normal; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.hh-tag.on { background: var(--brand); color: #fff; }
+.hh-tag.on i { color: #ffd7df; }
+.hh-tag.cur { background: #fff; box-shadow: 0 0 0 3px var(--brand), 0 8px 20px -8px rgba(0, 0, 0, .5); }
+.hh-tag.cur::before {
+  content: 'คุณอยู่ที่นี่'; position: absolute; left: 50%; top: -11px; translate: -50% 0; padding: 2px 8px; border-radius: 999px;
+  background: var(--brand); color: #fff; font: 700 10px/1.3 var(--font); white-space: nowrap;
+}
+.night .hh-tag { background: rgba(28, 22, 30, .72); color: #fff3dd; }
+.night .hh-tag i { color: #d8c7b3; }
+.night .hh-tag.cur { background: rgba(28, 22, 30, .88); }
+.night .hh-tag.on { background: var(--brand); color: #fff; }
+@keyframes hh-tag { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+
+.hh-clock {
+  position: absolute; left: var(--gutter); top: 74px; z-index: 2; margin: 0;
+  display: flex; align-items: center; gap: 8px; padding: 6px 13px 6px 10px; border-radius: 999px;
+  background: rgba(255, 252, 246, .85); color: var(--ink); text-shadow: none;
+  box-shadow: 0 6px 18px -10px rgba(0, 0, 0, .45); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  animation: fade .6s .8s both;
+}
+.hh-clock svg { width: 17px; height: 17px; fill: none; stroke: #e39b1e; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hh-clock b { font: 600 14px/1 var(--font); font-variant-numeric: tabular-nums; }
+.hh-clock small { font-size: 11px; font-weight: 500; opacity: .6; }
+.hh-clock span { font: 500 12px/1 var(--font); color: var(--muted); }
+.night .hh-clock { background: rgba(28, 22, 30, .72); color: #fff3dd; }
+.night .hh-clock svg { stroke: #ffd98a; }
+.night .hh-clock span { color: #d8c7b3; }
+
+/* arrival fog: covers the house, shows the room name, then parts left and right */
+.hh-fog { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; --fc: #f2f4f7; --ft: var(--ink); }
+.dawn .hh-fog { --fc: #ece8f6; } .eve .hh-fog { --fc: #f8ddc9; } .night .hh-fog { --fc: #262a40; --ft: #fff3dd; }
+.hh-fog-base { position: absolute; inset: 0; background: var(--fc); animation: hh-fog-base 1.5s ease .7s forwards; }
+.hh-fog-half { position: absolute; top: -25%; bottom: -25%; width: 78%; }
+.hh-fog-half.l { left: -12%; animation: hh-fog-l 2.6s cubic-bezier(.5, .05, .3, 1) .55s forwards; }
+.hh-fog-half.r { right: -12%; animation: hh-fog-r 2.6s cubic-bezier(.5, .05, .3, 1) .55s forwards; }
+.hh-fog-half i { position: absolute; border-radius: 50%; background: radial-gradient(closest-side, var(--fc) 35%, transparent); filter: blur(6px); }
+.hh-fog-title {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: grid; justify-items: center; gap: 6px;
+  color: var(--ft); text-shadow: none; opacity: 0; animation: hh-fog-title 1.9s ease forwards;
+}
+.hh-fog-title b { font: 700 clamp(34px, 5vw, 56px)/1.1 var(--font); }
+.hh-fog-title i { font: 600 13px var(--font); font-style: normal; letter-spacing: .42em; text-transform: uppercase; }
+@keyframes hh-fog-base { to { opacity: 0; } }
+@keyframes hh-fog-l { to { transform: translateX(-75%) scale(1.25); opacity: 0; } }
+@keyframes hh-fog-r { to { transform: translateX(75%) scale(1.25); opacity: 0; } }
+@keyframes hh-fog-title { 0% { opacity: 0; translate: -50% -46%; } 25%, 55% { opacity: 1; translate: -50% -50%; } 100% { opacity: 0; translate: -50% -56%; } }
+
+/* screens taller than the photo (iPad landscape, square windows): show the whole house edge to edge,
+   and feather its top and bottom into the sky and grass behind it */
+@media (min-aspect-ratio: 1/1) and (max-aspect-ratio: 3/2) {
+  .house-stage { width: 100%; }
+  .house-stage { -webkit-mask-image: linear-gradient(transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(transparent, #000 5%, #000 95%, transparent); }
+}
+
+/* portrait phones and iPads: the house fills the full height and swipes sideways (it opens on the current
+   room), so rooms stay big; labels give way to the pulsing dots on each room */
+@media (max-aspect-ratio: 1/1) {
+  .house-pan {
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y;
+  }
+  .house-pan::-webkit-scrollbar { display: none; }
+  .house-stage { left: 0; top: 0; translate: none; height: 100%; width: auto; }
+  .hh-tag, .hh-lead { display: none; }
+  .hh-clock { top: 68px; }
+  .hh-swipe {
+    position: absolute; left: 50%; bottom: 168px; translate: -50% 0; z-index: 2; margin: 0;
+    display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; white-space: nowrap;
+    background: rgba(28, 22, 30, .6); color: #fff; font: 500 13px/1 var(--font); text-shadow: none; pointer-events: none;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    animation: fade .6s 1.2s both; transition: opacity .5s, translate .5s;
+  }
+  .hh-swipe svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; animation: hh-nudge 1.8s ease-in-out infinite; }
+  .hh-swipe.gone { opacity: 0; translate: -50% 8px; }
+}
+@media (max-aspect-ratio: 1/1) and (min-width: 700px) { .hh-swipe { bottom: 110px; } }
+@keyframes hh-nudge { 0%, 100% { translate: -3px 0; } 50% { translate: 3px 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .house-photo, .house-photo.push, .house-img, .hh-drift, .hh-mist-a, .hh-mist-b, .hh-sunglow, .hh-lamp, .hh-bulb, .hh-star, .hh-fly, .hh-smoke, .hh-dot { animation: none; }
+  .hh-lead { animation: none; stroke-dashoffset: 0; }
+  .hh-tag { animation: none; opacity: 1; }
+  .hh-fog { display: none; }
+}
